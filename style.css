@@ -617,7 +617,6 @@ canvas {
         gap: 6px;
     }
     
-    /* Canvas responsive */
     .panel-qendra {
         padding: 8px;
     }
@@ -630,7 +629,6 @@ canvas {
         aspect-ratio: 1 / 1;
     }
     
-    /* Fontet me te medhenj per lexim me te mire */
     .card-header {
         font-size: 12px;
         padding: 8px 12px;
@@ -652,7 +650,6 @@ canvas {
         width: 20px;
     }
     
-    /* Excel box */
     .excel-box {
         padding: 12px;
     }
@@ -692,13 +689,11 @@ canvas {
         font-size: 13px;
     }
     
-    /* Butonat me te medhenj per prekje */
     .btn-vizato {
         padding: 12px;
         font-size: 14px;
     }
     
-    /* Filter stats - 2 kolona ne mobile */
     .filter-stats {
         grid-template-columns: 1fr 1fr;
         gap: 6px;
@@ -712,7 +707,6 @@ canvas {
         font-size: 10px;
     }
     
-    /* Filter butonat */
     .filter-buttons {
         gap: 6px;
     }
@@ -723,7 +717,6 @@ canvas {
         min-width: calc(50% - 3px);
     }
     
-    /* Power grid */
     .power-item span {
         font-size: 10px;
     }
@@ -732,7 +725,6 @@ canvas {
         font-size: 16px;
     }
     
-    /* Analiza box */
     .analiza-box {
         max-height: 400px;
         padding: 10px;
@@ -743,13 +735,11 @@ canvas {
         padding: 10px 12px;
     }
     
-    /* Butonat PDF/Excel */
     .btn-pdf {
         padding: 12px;
         font-size: 13px;
     }
     
-    /* Swap header */
     .swap-title {
         font-size: 12px;
     }
@@ -759,13 +749,11 @@ canvas {
         padding: 4px 10px;
     }
     
-    /* Comment box */
     .comment-box {
         font-size: 12px;
         padding: 10px;
     }
     
-    /* Filter info */
     .filter-info {
         font-size: 12px;
         padding: 8px 12px;
