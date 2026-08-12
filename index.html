@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#2563eb">
+    <title>Diagramet Vektoriale - Filter Edition</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="panel-majtas">
+            <div class="card">
+                <div class="card-header header-dark">Lexo Matjet (Excel)</div>
+                <div class="excel-box">
+                    <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" class="file-input">
+                    <div class="search-box" id="searchBox">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Kërko Njehsorin...">
+                        <button class="btn-search" onclick="searchMeter()">Kërko</button>
+                    </div>
+                    <div class="nav-controls" id="navControls">
+                        <button class="btn-nav" onclick="prevRow()">◄</button>
+                        <input type="range" id="rowSlider" min="0" value="0" class="slider-range" oninput="sliderChange()">
+                        <button class="btn-nav" onclick="nextRow()">►</button>
+                    </div>
+                    <div class="row-counter-wrapper" id="rowCounterWrapper">
+                        Rreshti: <input type="number" id="manualRowInput" class="manual-row-input" min="1" value="1" onchange="jumpToRow()"> / <span id="totalRows">0</span>
+                        <span class="serial-display" id="serialDisplay">Njehsori: -</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header header-blu">Tensionet</div>
+                <table>
+                    <tr><td class="text-blu">U1</td><td><div class="input-wrapper"><input type="number" id="u1_mag" value="242.70" step="0.01" onchange="vizato()"><span class="unit">V</span></div></td></tr>
+                    <tr><td class="text-blu">U2</td><td><div class="input-wrapper"><input type="number" id="u2_mag" value="242.11" step="0.01" onchange="vizato()"><span class="unit">V</span></div></td></tr>
+                    <tr><td class="text-blu">U3</td><td><div class="input-wrapper"><input type="number" id="u3_mag" value="241.96" step="0.01" onchange="vizato()"><span class="unit">V</span></div></td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header header-kuqe">Rrymat</div>
+                <table>
+                    <tr><td class="text-kuqe">I1</td><td><div class="input-wrapper"><input type="number" id="i1_mag" value="6.48" step="0.01" onchange="vizato()"><span class="unit">A</span></div></td></tr>
+                    <tr><td class="text-kuqe">I2</td><td><div class="input-wrapper"><input type="number" id="i2_mag" value="6.12" step="0.01" onchange="vizato()"><span class="unit">A</span></div></td></tr>
+                    <tr><td class="text-kuqe">I3</td><td><div class="input-wrapper"><input type="number" id="i3_mag" value="6.26" step="0.01" onchange="vizato()"><span class="unit">A</span></div></td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header header-gjelber">Këndet Rrymë-Tension</div>
+                <table>
+                    <tr><td class="text-gjelber">I1-U1</td><td><div class="input-wrapper"><input type="number" id="ang_i1" value="30" onchange="vizato()"><span class="unit">°</span></div></td></tr>
+                    <tr><td class="text-gjelber">I2-U1</td><td><div class="input-wrapper"><input type="number" id="ang_i2" value="270" onchange="vizato()"><span class="unit">°</span></div></td></tr>
+                    <tr><td class="text-gjelber">I3-U1</td><td><div class="input-wrapper"><input type="number" id="ang_i3" value="150" onchange="vizato()"><span class="unit">°</span></div></td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="swap-header">
+                    <span class="swap-title">Këndet e tensioneve</span>
+                    <button class="btn-swap" onclick="swapKendetTensionit()">⇌ Swap</button>
+                </div>
+                <table>
+                    <tr><td class="text-blu">U1-U2</td><td><div class="input-wrapper"><input type="number" id="ang_u2" value="240" onchange="vizato()"><span class="unit">°</span></div></td></tr>
+                    <tr><td class="text-blu">U1-U3</td><td><div class="input-wrapper"><input type="number" id="ang_u3" value="120" onchange="vizato()"><span class="unit">°</span></div></td></tr>
+                </table>
+            </div>
+
+            <button class="btn-vizato" onclick="vizato()">Përditëso Grafikun</button>
+        </div>
+
+        <div class="panel-qendra">
+            <canvas id="vektorCanvas"></canvas>
+        </div>
+
+        <div class="panel-analiza">
+
+            <div class="card filter-panel" id="filterPanel" style="display:none;">
+                <div class="card-header header-orange">🔍 Filtro Rastet</div>
+                <div class="filter-stats">
+                    <div class="stat-item stat-total">
+                        <span class="stat-num" id="statTotal">0</span>
+                        <span class="stat-label">Totali</span>
+                    </div>
+                    <div class="stat-item stat-err">
+                        <span class="stat-num" id="statErr">0</span>
+                        <span class="stat-label">🔴 Errors</span>
+                    </div>
+                    <div class="stat-item stat-warn">
+                        <span class="stat-num" id="statWarn">0</span>
+                        <span class="stat-label">🟡 Warnings</span>
+                    </div>
+                    <div class="stat-item stat-ok">
+                        <span class="stat-num" id="statOk">0</span>
+                        <span class="stat-label">🟢 OK</span>
+                    </div>
+                </div>
+                <div class="filter-buttons">
+                    <button class="btn-filter active" data-filter="all" onclick="applyFilter('all')">Të gjitha</button>
+                    <button class="btn-filter btn-filter-err" data-filter="error" onclick="applyFilter('error')">🔴 Errors</button>
+                    <button class="btn-filter btn-filter-warn" data-filter="warning" onclick="applyFilter('warning')">🟡 Warnings</button>
+                    <button class="btn-filter btn-filter-ok" data-filter="ok" onclick="applyFilter('ok')">🟢 OK</button>
+                </div>
+                <div class="filter-info" id="filterInfo">
+                    Duke shfaqur: <strong>Të gjitha rastet</strong>
+                </div>
+                <div class="comment-box" id="commentBox" style="display:none;">
+                    <span class="comment-label">💬 Koment:</span>
+                    <span class="comment-text" id="commentText">-</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header header-dark">POWER (Fuqia Totale 3-Fazore)</div>
+                <div class="power-grid">
+                    <div class="power-item"><span>Active Power (P)</span><strong id="val_P">0.00 kW</strong></div>
+                    <div class="power-item"><span>Reactive Power (Q)</span><strong id="val_Q">0.00 kvar</strong></div>
+                    <div class="power-item"><span>Apparent Power (S)</span><strong id="val_S">0.00 kVA</strong></div>
+                    <div class="power-item"><span>cosφ</span><strong id="val_PF">0.000</strong></div>
+                </div>
+            </div>
+
+            <div class="card" style="flex-grow: 1; display: flex; flex-direction: column;">
+                <div class="card-header header-dark">Diagnostikimi Rrjetit</div>
+                <div class="analiza-box" id="analizaRaport"></div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-pdf" onclick="eksportoPDF()">📄 PDF (Njehsori Aktual)</button>
+                <button class="btn-pdf btn-pdf-excel" onclick="eksportoExcel()">📊 Excel (Raport)</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
