@@ -1,0 +1,814 @@
+:root {
+    --primary-bg: #f1f5f9;
+    --card-bg: #ffffff;
+    --text-main: #334155;
+    --blue-main: #2563eb;
+    --blue-light: #eff6ff;
+    --red-main: #dc2626;
+    --green-main: #059669;
+    --orange-main: #d97706;
+    --dark-main: #1e293b;
+    --border-color: #e2e8f0;
+    --input-bg: #f8fafc;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1400px;
+    width: 100%;
+}
+
+/* PANELI MAJTAS */
+.panel-majtas {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+}
+
+.header-blu { background-color: var(--blue-main); }
+.header-kuqe { background-color: var(--red-main); }
+.header-gjelber { background-color: var(--green-main); }
+.header-dark { background-color: var(--dark-main); }
+.header-orange { background-color: var(--orange-main); }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 4px 10px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 12px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td:first-child {
+    font-weight: 600;
+    width: 35%;
+}
+
+.text-blu { color: var(--blue-main); }
+.text-kuqe { color: var(--red-main); }
+.text-gjelber { color: var(--green-main); }
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 3px 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+}
+
+input[type="number"]:focus {
+    border-color: var(--blue-main);
+    background-color: white;
+    outline: none;
+}
+
+.unit {
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 500;
+    width: 15px;
+    text-align: left;
+}
+
+.swap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: var(--blue-light);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.swap-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue-main);
+    text-transform: uppercase;
+}
+
+.btn-swap {
+    background-color: white;
+    color: var(--blue-main);
+    border: 1px solid #bfdbfe;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-swap:hover {
+    background-color: var(--blue-main);
+    color: white;
+}
+
+.excel-box {
+    padding: 10px;
+    background-color: #f8fafc;
+}
+
+.file-input {
+    width: 100%;
+    font-size: 11px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.search-box {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+    display: none;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 4px 8px;
+    font-size: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    outline: none;
+    min-width: 0;
+}
+
+.btn-search {
+    background-color: var(--blue-main);
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    font-size: 11px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    display: none;
+    font-size: 12px;
+}
+
+.btn-nav {
+    background: #e2e8f0;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.slider-range {
+    flex-grow: 1;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.row-counter-wrapper {
+    text-align: center;
+    font-size: 11px;
+    color: var(--dark-main);
+    margin-top: 6px;
+    display: none;
+}
+
+.manual-row-input {
+    width: 50px !important;
+    text-align: center !important;
+    font-size: 11px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 3px;
+}
+
+.serial-display {
+    display: block;
+    margin-top: 4px;
+    font-weight: bold;
+    font-size: 11px;
+    color: var(--blue-main);
+}
+
+.btn-vizato {
+    background: var(--dark-main);
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 2px;
+}
+
+/* PANELI QENDRA */
+.panel-qendra {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+canvas {
+    width: 500px;
+    height: 500px;
+    max-width: 100%;
+    border-radius: 50%;
+    background-color: #fafcfd;
+    display: block;
+}
+
+/* PANELI DJATHTAS */
+.panel-analiza {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.filter-panel {
+    border: 2px solid var(--orange-main);
+}
+
+.filter-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 8px;
+    background-color: #fef3c7;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 4px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.stat-num {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--dark-main);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 9px;
+    color: #64748b;
+    margin-top: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.stat-err .stat-num { color: var(--red-main); }
+.stat-warn .stat-num { color: var(--orange-main); }
+.stat-ok .stat-num { color: var(--green-main); }
+
+.filter-buttons {
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    background: white;
+    flex-wrap: wrap;
+}
+
+.btn-filter {
+    flex: 1;
+    min-width: 70px;
+    padding: 6px 8px;
+    border: 1px solid var(--border-color);
+    background: white;
+    color: var(--text-main);
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.btn-filter:hover {
+    background: var(--primary-bg);
+}
+
+.btn-filter.active {
+    background: var(--dark-main);
+    color: white;
+    border-color: var(--dark-main);
+}
+
+.btn-filter-err.active {
+    background: var(--red-main);
+    border-color: var(--red-main);
+}
+
+.btn-filter-warn.active {
+    background: var(--orange-main);
+    border-color: var(--orange-main);
+}
+
+.btn-filter-ok.active {
+    background: var(--green-main);
+    border-color: var(--green-main);
+}
+
+.filter-info {
+    padding: 6px 10px;
+    background: #f8fafc;
+    font-size: 11px;
+    color: var(--text-main);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.comment-box {
+    padding: 8px 10px;
+    background: #fffbeb;
+    border-top: 1px solid var(--border-color);
+    font-size: 11px;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+}
+
+.comment-label {
+    font-weight: bold;
+    color: var(--orange-main);
+    white-space: nowrap;
+}
+
+.comment-text {
+    color: var(--text-main);
+    word-break: break-word;
+}
+
+/* POWER GRID */
+.power-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 10px;
+    background: var(--card-bg);
+}
+
+.power-item {
+    display: flex;
+    flex-direction: column;
+    background: var(--primary-bg);
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.power-item span {
+    font-size: 10px;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.power-item strong {
+    font-size: 15px;
+    color: var(--blue-main);
+    font-weight: 900;
+}
+
+.analiza-box {
+    padding: 12px;
+    background-color: #f8fafc;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.alert {
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border-left: 4px solid;
+    line-height: 1.4;
+}
+
+.alert-ok {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-left-color: var(--green-main);
+}
+
+.alert-warn {
+    background-color: #fffbeb;
+    color: #92400e;
+    border-left-color: var(--orange-main);
+}
+
+.alert-err {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-left-color: var(--red-main);
+}
+
+.alert-icon {
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.alert-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    word-break: break-word;
+}
+
+.alert-title {
+    font-weight: bold;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    opacity: 0.8;
+}
+
+.btn-group {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-pdf {
+    background-color: var(--blue-main);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    flex: 1;
+    transition: all 0.2s;
+}
+
+.btn-pdf:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-pdf-excel {
+    background-color: var(--green-main);
+}
+
+.btn-pdf-excel:hover {
+    background-color: #047857;
+}
+
+.btn-pdf-filter {
+    background-color: var(--orange-main);
+}
+
+.btn-pdf-filter:hover {
+    background-color: #b45309;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET (max 1200px)
+   ============================================ */
+@media (max-width: 1200px) {
+    .container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .panel-majtas {
+        width: 250px;
+    }
+    
+    .panel-analiza {
+        width: 320px;
+    }
+    
+    canvas {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET E VOGEL (max 900px)
+   ============================================ */
+@media (max-width: 900px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 100%;
+    }
+    
+    .panel-majtas,
+    .panel-qendra,
+    .panel-analiza {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .panel-qendra {
+        order: -1;
+        padding: 10px;
+    }
+    
+    canvas {
+        width: 450px;
+        height: 450px;
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE (max 600px)
+   ============================================ */
+@media (max-width: 600px) {
+    body {
+        padding: 8px;
+    }
+    
+    .container {
+        gap: 8px;
+    }
+    
+    .panel-majtas,
+    .panel-analiza {
+        gap: 6px;
+    }
+    
+    /* Canvas responsive */
+    .panel-qendra {
+        padding: 8px;
+    }
+    
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 400px;
+        max-height: 400px;
+        aspect-ratio: 1 / 1;
+    }
+    
+    /* Fontet me te medhenj per lexim me te mire */
+    .card-header {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    td {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+    
+    input[type="number"] {
+        width: 90px;
+        font-size: 13px;
+        padding: 6px 8px;
+    }
+    
+    .unit {
+        font-size: 12px;
+        width: 20px;
+    }
+    
+    /* Excel box */
+    .excel-box {
+        padding: 12px;
+    }
+    
+    .file-input {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .search-input {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    
+    .btn-search {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+    
+    .btn-nav {
+        padding: 8px 12px;
+        font-size: 16px;
+        min-width: 40px;
+    }
+    
+    .row-counter-wrapper {
+        font-size: 13px;
+    }
+    
+    .manual-row-input {
+        width: 60px !important;
+        font-size: 13px !important;
+        padding: 6px !important;
+    }
+    
+    .serial-display {
+        font-size: 13px;
+    }
+    
+    /* Butonat me te medhenj per prekje */
+    .btn-vizato {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    /* Filter stats - 2 kolona ne mobile */
+    .filter-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+    
+    .stat-num {
+        font-size: 22px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    /* Filter butonat */
+    .filter-buttons {
+        gap: 6px;
+    }
+    
+    .btn-filter {
+        font-size: 11px;
+        padding: 8px 10px;
+        min-width: calc(50% - 3px);
+    }
+    
+    /* Power grid */
+    .power-item span {
+        font-size: 10px;
+    }
+    
+    .power-item strong {
+        font-size: 16px;
+    }
+    
+    /* Analiza box */
+    .analiza-box {
+        max-height: 400px;
+        padding: 10px;
+    }
+    
+    .alert {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+    
+    /* Butonat PDF/Excel */
+    .btn-pdf {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    /* Swap header */
+    .swap-title {
+        font-size: 12px;
+    }
+    
+    .btn-swap {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+    
+    /* Comment box */
+    .comment-box {
+        font-size: 12px;
+        padding: 10px;
+    }
+    
+    /* Filter info */
+    .filter-info {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE I VOGEL (max 400px)
+   ============================================ */
+@media (max-width: 400px) {
+    body {
+        padding: 5px;
+    }
+    
+    input[type="number"] {
+        width: 75px;
+    }
+    
+    .btn-filter {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+    
+    .stat-num {
+        font-size: 18px;
+    }
+    
+    canvas {
+        max-width: 320px;
+        max-height: 320px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+}
+
+/* ============================================
+   ORIENTIMI HORIZONTAL NE MOBILE
+   ============================================ */
+@media (max-width: 900px) and (orientation: landscape) {
+    canvas {
+        max-width: 350px;
+        max-height: 350px;
+    }
+}
