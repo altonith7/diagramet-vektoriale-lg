@@ -1,0 +1,1 @@
+# diagramet-vektoriale-lg
