@@ -34,7 +34,9 @@ body {
     padding: 15px;
 }
 
-/* TOP BANNER */
+/* ============================================
+   TOP BANNER (SHIRITI I KONSUMATORIT)
+   ============================================ */
 .top-banner-wrapper {
     width: 100%;
     display: flex;
@@ -49,15 +51,18 @@ body {
     border-radius: 8px;
     padding: 12px 15px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 15px;
+    /* Kolonat: Dist | Shifra | Konsumatori | Adresa | TS | Grupi | Konstanta */
+    grid-template-columns: 0.7fr 0.9fr 2.2fr 1.4fr 2fr 0.7fr 0.7fr;
+    gap: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     border: 1px solid #334155;
+    align-items: start;
 }
 
 .banner-item {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .banner-item span {
@@ -74,6 +79,14 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* Konsumatori dhe TS - lejo wrap ne 2 rreshta */
+.banner-item:nth-child(3) strong,
+.banner-item:nth-child(5) strong {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.25;
 }
 
 .container {
@@ -588,21 +601,29 @@ canvas {
     canvas { width: 400px; height: 400px; }
 }
 
+@media (max-width: 1100px) {
+    .top-banner {
+        grid-template-columns: 0.8fr 1fr 2fr 1.3fr 1.8fr 0.8fr 0.8fr;
+        gap: 10px;
+    }
+}
+
 @media (max-width: 900px) {
     body { padding: 10px; }
     .container { flex-direction: column; align-items: stretch; max-width: 100%; }
     .panel-majtas, .panel-qendra, .panel-analiza { width: 100%; max-width: 100%; }
     .panel-qendra { order: -1; padding: 10px; }
     canvas { width: 450px; height: 450px; max-width: 100%; }
-}
 
-@media (max-width: 768px) {
     .top-banner {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
         padding: 10px;
     }
-    .banner-item:nth-child(3), .banner-item:nth-child(4) {
+    /* Konsumatori, Adresa, Emri i TS marrin rresht të plotë ne mobile */
+    .banner-item:nth-child(3),
+    .banner-item:nth-child(4),
+    .banner-item:nth-child(5) {
         grid-column: span 2;
     }
 }
