@@ -1,12 +1,20 @@
 // ============================================
-// DIAGRAMET VEKTORIALE - V7 FINAL
-// Kendet e rrymave TE GJITHA kundrejt U1
+// DIAGRAMET VEKTORIALE - V8 FINAL
+// Me Top Banner për të dhënat e klientit
 // ============================================
 
-const canvas = document.getElementById('vektorCanvas');
-const ctx = canvas.getContext('2d');
+let canvas, ctx;
+
+document.addEventListener('DOMContentLoaded', function() {
+    canvas = document.getElementById('vektorCanvas');
+    if (canvas) {
+        ctx = canvas.getContext('2d');
+        vizato();
+    }
+});
 
 function setupCanvas() {
+    if (!canvas) return;
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * dpr;
@@ -85,10 +93,12 @@ document.getElementById('excelFile').addEventListener('change', function(e) {
 
         commentColIdx = findColumnIndex(['coment', 'comment', 'verejtje', 'koment']);
 
+        // Shfaq elementet UI
         document.getElementById('searchBox').style.display = 'flex';
         document.getElementById('navControls').style.display = 'flex';
         document.getElementById('rowCounterWrapper').style.display = 'block';
         document.getElementById('filterPanel').style.display = 'block';
+        document.getElementById('topBanner').style.display = 'flex'; // Shfaq bannerin
 
         const slider = document.getElementById('rowSlider');
         slider.max = excelData.length - 1;
@@ -336,6 +346,27 @@ function loadRow(index) {
         if (originalHeaders[i] && row[i] !== undefined && row[i] !== null && row[i] !== '') {
             currentRowData[originalHeaders[i]] = row[i];
         }
+    }
+
+    // UPDATE TOP BANNER
+    const gjejVleren = (fjaleKyce) => {
+        for (let key in currentRowData) {
+            let k = key.toLowerCase();
+            for (let fjale of fjaleKyce) {
+                if (k.includes(fjale)) return currentRowData[key];
+            }
+        }
+        return '-';
+    };
+
+    if (document.getElementById('b_distrikti')) {
+        document.getElementById('b_distrikti').textContent = gjejVleren(['distrikt', 'distrikti']);
+        document.getElementById('b_shifra').textContent = gjejVleren(['shifra']);
+        document.getElementById('b_konsumatori').textContent = gjejVleren(['konsumator', 'emri']);
+        document.getElementById('b_adresa').textContent = gjejVleren(['adresa', 'lokacioni']);
+        document.getElementById('b_ts').textContent = gjejVleren(['emri i ts', 'ts', 'trafostacion']);
+        document.getElementById('b_grupi').textContent = gjejVleren(['grupi', 'tarifor']);
+        document.getElementById('b_konstanta').textContent = gjejVleren(['konstant']);
     }
 
     vizato();
@@ -659,5 +690,4 @@ function eksportoExcel() {
     alert('Excel u eksportua!');
 }
 
-window.addEventListener('load', vizato);
 window.addEventListener('resize', vizato);
