@@ -28,10 +28,52 @@ body {
     background-color: var(--primary-bg);
     color: var(--text-main);
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     min-height: 100vh;
     padding: 15px;
+}
+
+/* TOP BANNER */
+.top-banner-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.top-banner {
+    max-width: 1400px;
+    width: 100%;
+    background: var(--dark-main);
+    border-radius: 8px;
+    padding: 12px 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #334155;
+}
+
+.banner-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-item span {
+    font-size: 9px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.banner-item strong {
+    font-size: 13px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .container {
@@ -536,91 +578,40 @@ canvas {
     background-color: #047857;
 }
 
-.btn-pdf-filter {
-    background-color: var(--orange-main);
-}
-
-.btn-pdf-filter:hover {
-    background-color: #b45309;
-}
-
 /* ============================================
-   RESPONSIVE DESIGN - TABLET (max 1200px)
+   RESPONSIVE DESIGN 
    ============================================ */
 @media (max-width: 1200px) {
-    .container {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    
-    .panel-majtas {
-        width: 250px;
-    }
-    
-    .panel-analiza {
-        width: 320px;
-    }
-    
-    canvas {
-        width: 400px;
-        height: 400px;
-    }
+    .container { flex-wrap: wrap; gap: 10px; }
+    .panel-majtas { width: 250px; }
+    .panel-analiza { width: 320px; }
+    canvas { width: 400px; height: 400px; }
 }
 
-/* ============================================
-   RESPONSIVE DESIGN - TABLET E VOGEL (max 900px)
-   ============================================ */
 @media (max-width: 900px) {
-    body {
+    body { padding: 10px; }
+    .container { flex-direction: column; align-items: stretch; max-width: 100%; }
+    .panel-majtas, .panel-qendra, .panel-analiza { width: 100%; max-width: 100%; }
+    .panel-qendra { order: -1; padding: 10px; }
+    canvas { width: 450px; height: 450px; max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .top-banner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
         padding: 10px;
     }
-    
-    .container {
-        flex-direction: column;
-        align-items: stretch;
-        max-width: 100%;
-    }
-    
-    .panel-majtas,
-    .panel-qendra,
-    .panel-analiza {
-        width: 100%;
-        max-width: 100%;
-    }
-    
-    .panel-qendra {
-        order: -1;
-        padding: 10px;
-    }
-    
-    canvas {
-        width: 450px;
-        height: 450px;
-        max-width: 100%;
+    .banner-item:nth-child(3), .banner-item:nth-child(4) {
+        grid-column: span 2;
     }
 }
 
-/* ============================================
-   RESPONSIVE DESIGN - MOBILE (max 600px)
-   ============================================ */
 @media (max-width: 600px) {
-    body {
-        padding: 8px;
-    }
-    
-    .container {
-        gap: 8px;
-    }
-    
-    .panel-majtas,
-    .panel-analiza {
-        gap: 6px;
-    }
-    
-    .panel-qendra {
-        padding: 8px;
-    }
-    
+    body { padding: 8px; }
+    .container { gap: 8px; }
+    .panel-majtas, .panel-analiza { gap: 6px; }
+    .panel-qendra { padding: 8px; }
     canvas {
         width: 100% !important;
         height: auto !important;
@@ -628,175 +619,10 @@ canvas {
         max-height: 400px;
         aspect-ratio: 1 / 1;
     }
-    
-    .card-header {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-    
-    td {
-        font-size: 13px;
-        padding: 6px 10px;
-    }
-    
-    input[type="number"] {
-        width: 90px;
-        font-size: 13px;
-        padding: 6px 8px;
-    }
-    
-    .unit {
-        font-size: 12px;
-        width: 20px;
-    }
-    
-    .excel-box {
-        padding: 12px;
-    }
-    
-    .file-input {
-        font-size: 13px;
-        margin-bottom: 10px;
-    }
-    
-    .search-input {
-        font-size: 13px;
-        padding: 8px 10px;
-    }
-    
-    .btn-search {
-        font-size: 13px;
-        padding: 8px 12px;
-    }
-    
-    .btn-nav {
-        padding: 8px 12px;
-        font-size: 16px;
-        min-width: 40px;
-    }
-    
-    .row-counter-wrapper {
-        font-size: 13px;
-    }
-    
-    .manual-row-input {
-        width: 60px !important;
-        font-size: 13px !important;
-        padding: 6px !important;
-    }
-    
-    .serial-display {
-        font-size: 13px;
-    }
-    
-    .btn-vizato {
-        padding: 12px;
-        font-size: 14px;
-    }
-    
-    .filter-stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-    }
-    
-    .stat-num {
-        font-size: 22px;
-    }
-    
-    .stat-label {
-        font-size: 10px;
-    }
-    
-    .filter-buttons {
-        gap: 6px;
-    }
-    
-    .btn-filter {
-        font-size: 11px;
-        padding: 8px 10px;
-        min-width: calc(50% - 3px);
-    }
-    
-    .power-item span {
-        font-size: 10px;
-    }
-    
-    .power-item strong {
-        font-size: 16px;
-    }
-    
-    .analiza-box {
-        max-height: 400px;
-        padding: 10px;
-    }
-    
-    .alert {
-        font-size: 12px;
-        padding: 10px 12px;
-    }
-    
-    .btn-pdf {
-        padding: 12px;
-        font-size: 13px;
-    }
-    
-    .swap-title {
-        font-size: 12px;
-    }
-    
-    .btn-swap {
-        font-size: 11px;
-        padding: 4px 10px;
-    }
-    
-    .comment-box {
-        font-size: 12px;
-        padding: 10px;
-    }
-    
-    .filter-info {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-}
-
-/* ============================================
-   RESPONSIVE DESIGN - MOBILE I VOGEL (max 400px)
-   ============================================ */
-@media (max-width: 400px) {
-    body {
-        padding: 5px;
-    }
-    
-    input[type="number"] {
-        width: 75px;
-    }
-    
-    .btn-filter {
-        font-size: 10px;
-        padding: 6px 8px;
-    }
-    
-    .stat-num {
-        font-size: 18px;
-    }
-    
-    canvas {
-        max-width: 320px;
-        max-height: 320px;
-    }
-    
-    .btn-group {
-        flex-direction: column;
-    }
-}
-
-/* ============================================
-   ORIENTIMI HORIZONTAL NE MOBILE
-   ============================================ */
-@media (max-width: 900px) and (orientation: landscape) {
-    canvas {
-        max-width: 350px;
-        max-height: 350px;
-    }
+    .card-header { font-size: 12px; padding: 8px 12px; }
+    td { font-size: 13px; padding: 6px 10px; }
+    input[type="number"] { width: 90px; font-size: 13px; padding: 6px 8px; }
+    .filter-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .btn-filter { font-size: 11px; padding: 8px 10px; min-width: calc(50% - 3px); }
+    .btn-pdf { padding: 12px; font-size: 13px; }
 }
